@@ -1,0 +1,17 @@
+# Data & checkpoints (excluded — see README "Data Availability")
+/data/
+*.sgy
+*.las
+*.pth
+*.pt
+*.h5
+*.hdf5
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
