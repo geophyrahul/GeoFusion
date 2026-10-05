@@ -18,9 +18,33 @@ The pipeline has three stages:
 2. **Multimodal architecture search** — a well-log MLP branch and a seismic CNN branch are fused and compared across model families (linear regression, Random Forest, XGBoost, 1D-CNN, hybrid CNN-LSTM) for predicting the proximate parameters (ash, moisture, volatile matter, fixed carbon) and GCV (`notebooks/02_multimodal_gcv_model_v1.ipynb`, `03_multimodal_gcv_model_v2.ipynb`).
 3. **Final GCV prediction pipeline** — data cleaning, multimodal dataset construction, training, and evaluation for the selected architecture, reported against held-out well data (`notebooks/04_coal_quality_gcv_prediction.ipynb`).
 
-![Multimodal fusion model training performance](results/multimodal_model_performance.png)
+## Notebook outputs
 
-*Training/validation diagnostics from the multimodal architecture-search notebooks (`02`/`03`), on their own train/test split (193/202 samples) — a different run from the final Results table below.*
+Figures below are saved outputs from the working notebooks in `Task_1/`, copied unchanged into `results/figures/`.
+
+**Seismic-to-well tie** (`Task_1/seismictowelltie.ipynb`): the well trace and synthetic overlaid on the Final PSDM stack, and the DL tie over the first 600 samples.
+
+| PSDM stack, TD_39 | DL tie, first 600 samples |
+|---|---|
+| ![Well tie on PSDM TD_39](results/figures/well_tie_psdm_td39.png) | ![Well tie, 600 samples](results/figures/well_tie_600_samples.png) |
+
+**Multimodal GCV model** (`Task_1/multi_model.ipynb`): training loss over 80 epochs, and predicted vs. true GCV.
+
+| Training loss | True vs. predicted GCV |
+|---|---|
+| ![Training loss](results/figures/multimodal_training_loss.png) | ![True vs predicted GCV](results/figures/multimodal_true_vs_pred_gcv.png) |
+
+**Physics-informed and fused prediction** (`Task_1/file.ipynb`, `Task_1/hhhh.ipynb`): the notebooks print MAE 221.51 for the DL model vs. 1229.67 for the physics model (`file.ipynb`), and MAE 201.85 for the DL + physics fusion (`hhhh.ipynb`).
+
+| Physics vs. DL prediction | DL + physics fusion vs. true |
+|---|---|
+| ![Physics vs DL prediction](results/figures/physics_vs_dl_prediction.png) | ![Fusion prediction](results/figures/fusion_prediction_vs_true.png) |
+
+| Training and test loss (Smooth L1 / Huber) | Well-22 correlation heatmap |
+|---|---|
+| ![Final train/test loss](results/figures/final_train_test_loss.png) | ![Well-22 correlation heatmap](results/figures/well22_correlation_heatmap.png) |
+
+The Results table below uses the figures reported in `docs/Bhoomathon_Report.pdf`. The MAE values printed in the notebooks above come from different runs and do not match that table.
 
 ## Results
 
